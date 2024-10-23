@@ -21,13 +21,14 @@ jobs:
       - name: Install Node.js dependencies
         run: npm install
 
+      - name: Open folder android
+        run: cd android
+
       - name: Set permissions for gradlew
-        run: chmod +x android/gradlew
+        run: chmod +x /.gradlew
 
       - name: Build Android APK
-        run: |
-          cd android
-          ./gradlew assembleRelease
+        run: ./gradlew assembleRelease
 
       - name: Send APK to Telegram
         run: |
