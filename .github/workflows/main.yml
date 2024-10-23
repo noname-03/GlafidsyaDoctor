@@ -21,23 +21,22 @@ jobs:
       - name: Install Node.js dependencies
         run: npm install
 
-      - name: Open folder android
-        run: cd android
-
       - name: Set permissions for gradlew
-        run: sudo chmod +x /.gradlew
+        run: chmod +x android/gradlew
 
       - name: Build Android APK
-        run: ./gradlew assembleRelease
+        run: |
+          cd android
+          ./gradlew assembleRelease
 
       - name: Send APK to Telegram
         run: |
           cd android/app/build/outputs/apk/release/
-          curl -X POST -H 'Content-Type: multipart/form-data' -F text='Mailing Jli' -F chat_id=$TG_CHAT_ID $TG_BOT_TOKEN/sendMessage
+          curl -X POST -H 'Content-Type: multipart/form-data' -F text='Testing' -F chat_id=$TG_CHAT_ID $TG_BOT_TOKEN/sendMessage
           curl -X POST -H 'Content-Type: multipart/form-data' -F document=@app-release.apk -F chat_id=$TG_CHAT_ID $TG_BOT_TOKEN/sendDocument
 
       - name: Upload APK artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3 # Update to the latest version
         with:
           name: android-apk
           path: android/app/build/outputs/apk/release/app-release.apk
