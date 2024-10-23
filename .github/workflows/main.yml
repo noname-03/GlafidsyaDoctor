@@ -36,6 +36,8 @@ jobs:
           curl -X POST -H 'Content-Type: multipart/form-data' -F text='Mailing Jli' -F chat_id=$TG_CHAT_ID $TG_BOT_TOKEN/sendMessage
           curl -X POST -H 'Content-Type: multipart/form-data' -F document=@app-release.apk -F chat_id=$TG_CHAT_ID $TG_BOT_TOKEN/sendDocument
 
-    artifacts:
-      paths:
-        - android/app/build/outputs/apk/
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: android-apk
+          path: android/app/build/outputs/apk/release/app-release.apk
