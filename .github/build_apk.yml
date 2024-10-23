@@ -25,7 +25,7 @@ jobs:
         run: cd android
 
       - name: Set permissions for gradlew
-        run: chmod +x /.gradlew
+        run: sudo chmod +x /.gradlew
 
       - name: Build Android APK
         run: ./gradlew assembleRelease
