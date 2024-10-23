@@ -18,6 +18,9 @@ jobs:
           distribution: 'adopt'
           java-version: '11'
 
+      - name: Grant execution permission to Gradle wrapper
+        run: chmod +x ./android/gradlew
+
       - name: Build APK
         run: |
           cd android
